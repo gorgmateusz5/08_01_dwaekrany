@@ -13,6 +13,17 @@ import android.widget.TextView;
 
 public class SummaryActivity extends AppCompatActivity {
 
+    private void confirm() {
+        String number = "ZG/" +
+                (1000 + new java.util.Random().nextInt(9000));
+
+        Intent result = new Intent();
+        result.putExtra(EXTRA_NUMBER, number);
+
+        setResult(RESULT_OK, result);
+        finish();
+    }
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +35,10 @@ public class SummaryActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        findViewById(R.id.btnConfirm).setOnClickListener(
+                v -> confirm()
+        );
 
         Intent intent = getIntent();
 
@@ -53,7 +68,8 @@ public class SummaryActivity extends AppCompatActivity {
 
     public static final String EXTRA_NEWSLETTER =
             "com.example.dwaekrany.NEWSLETTER";
-
+    public static final String EXTRA_NUMBER =
+            "com.example.dwaekrany.NUMBER";
 
 
 }
