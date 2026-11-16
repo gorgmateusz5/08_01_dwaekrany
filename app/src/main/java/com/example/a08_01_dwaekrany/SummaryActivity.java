@@ -10,9 +10,38 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.content.Intent;
 import android.widget.TextView;
+import android.content.ActivityNotFoundException;
+import android.widget.Toast;
 
 public class SummaryActivity extends AppCompatActivity {
 
+
+    private void share() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+
+        TextView tvSummary = findViewById(R.id.tvSummary);
+
+        intent.putExtra(
+                Intent.EXTRA_TEXT,
+                tvSummary.getText().toString()
+        );
+
+        try {
+            startActivity(
+                    Intent.createChooser(
+                            intent,
+                            "Udostępnij przez"
+                    )
+            );
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(
+                    this,
+                    "Brak aplikacji do udostępnienia",
+                    Toast.LENGTH_SHORT
+            ).show();
+        }
+    }
     private void confirm() {
         String number = "ZG/" +
                 (1000 + new java.util.Random().nextInt(9000));
