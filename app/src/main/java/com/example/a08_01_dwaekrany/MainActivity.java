@@ -26,6 +26,23 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SummaryActivity.class);
             startActivity(intent);
         });
+
+        Intent intent = new Intent(this, SummaryActivity.class);
+
+        intent.putExtra(SummaryActivity.EXTRA_NAME,
+                etName.getText().toString());
+
+        intent.putExtra(SummaryActivity.EXTRA_EMAIL,
+                etEmail.getText().toString());
+
+        intent.putExtra(SummaryActivity.EXTRA_LEVEL,
+                sbLevel.getProgress());
+
+        intent.putExtra(SummaryActivity.EXTRA_NEWSLETTER,
+                cbNewsletter.isChecked());
+
+        startActivity(intent);
+
     }
 
 
